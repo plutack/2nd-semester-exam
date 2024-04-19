@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import { connect } from "./database/connection.js";
 import authRoute from "./routes/auth_route.js";
 import postRoute from "./routes/post_route.js";
-
+import { userSeeder } from "./seeder/adminSeeder.js";
 // load .env file
 dotenv.config();
 
@@ -23,6 +23,7 @@ app.use("/posts", postRoute);
 connect()
   .then(() => {
     console.log("database successfully connected");
+    userSeeder();
     app.listen(port, () => console.log(`Server running on port: ${port}`));
   })
   .catch((error) => {

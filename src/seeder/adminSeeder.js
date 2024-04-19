@@ -1,10 +1,10 @@
 import { connect } from "../database/connection.js";
 
-export async function userSeeder() {
+export const userSeeder = async () => {
   const admin = {
     firstName: process.env.ADMIN_FIRSTNAME,
     lastName: process.env.ADMIN_LASTNAME,
-    email: process.env.ADMIN_LASTNAME,
+    email: process.env.ADMIN_EMAIL,
     password: process.env.ADMIN_PASSWORD,
     role: "ADMIN",
   };
@@ -18,4 +18,4 @@ export async function userSeeder() {
 
   const createdAdmin = await userModel.insertOne(admin);
   console.log("Admin created successfully", createdAdmin);
-}
+};

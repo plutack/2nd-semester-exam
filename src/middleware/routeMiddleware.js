@@ -1,4 +1,4 @@
-export const generateMiddleWare = (schema) => {
+export const generateMiddleware = (schema) => {
   return (req, res, next) => {
     // Middleware logic
     if (schema) {

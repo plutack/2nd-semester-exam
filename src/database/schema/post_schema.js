@@ -33,7 +33,7 @@ const postSchema = mongoose.Schema(
       required: true,
     },
     readCount: {
-      type: number,
+      type: Number,
       required: true,
     },
     readingTime: {
