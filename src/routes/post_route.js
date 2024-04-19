@@ -2,7 +2,8 @@
 import { Router } from "express";
 import * as postController from "../controller/post_controller.js";
 import { authMiddleware } from "../middleware/auth_middleware.js";
-
+import { generateMiddleWare } from "../middleware/routeMiddleware.js";
+import { postValidationSchema } from "../validation/postValidation.js";
 const postRoute = Router();
 
 // match route to their respective controller and add auth middleware to protected routes
