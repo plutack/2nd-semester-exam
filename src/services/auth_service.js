@@ -21,10 +21,10 @@ export const register = async (
 
   const hashedPassword = await bcrypt.hash(password, 10);
   const newUser = new User({
-    name,
+    firstName,
+    lastName,
     email,
     password: hashedPassword,
-    role,
   });
   await newUser.save();
   delete newUser.password;
@@ -45,7 +45,7 @@ export const login = async (email, password) => {
     },
     JWTSecret,
     {
-      expiresIn: "20m",
+      expiresIn: "60m",
     },
   );
   return {

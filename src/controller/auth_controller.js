@@ -19,11 +19,6 @@ export const register = async (req, res) => {
       data: newUser,
     });
   } catch (err) {
-    // report vallidation errors as http status code 400
-    if (err.name === "ValidationError") {
-      const errors = Object.values(err.errors).map((error) => error.message);
-      return res.status(400).json({ message: "Validation error", errors });
-    }
     res.status(err.statusCode || 500).json({ message: err.message });
   }
 };

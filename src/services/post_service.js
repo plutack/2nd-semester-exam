@@ -1,17 +1,25 @@
 // import necessary modules
 import Post from "../database/schema/post_schema.js";
-
+import { ErrorWithStatusCode } from "../exceptions/customErrorConstructor.js";
 export const getAllPosts = async ({
-  limit = 10,
+  limit = 20,
   page = 1,
   order = "desc",
   orderBy = "createdAt",
 }) => {
   const skip = (page - 1) * limit;
-  const sortOptions = { [orderBy]: order };
+  const allowedOrderFields = ["createdAt", "readingCount", "readingTime"];
+  if (!allowedOrderFields.includes(orderBy)) {
+    throw new ErrorWithStatusCode(
+      `Bad request: Ordering by ${orderBy} is not supported.`,
+      400,
+    );
+  }
+
+  const sortOptions = { [orderBy]: order === "desc" ? -1 : 1 };
 
   const posts = await Post.find({})
-    .populate("user", "")
+    .populate("user", "name") // Assuming you want to include the user's name
     .sort(sortOptions)
     .skip(skip)
     .limit(parseInt(limit));
