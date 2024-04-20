@@ -5,6 +5,7 @@ import { connect } from "./database/connection.js";
 import authRoute from "./routes/auth_route.js";
 import postRoute from "./routes/post_route.js";
 import { userSeeder } from "./seeder/adminSeeder.js";
+import { malformedBodyChecker } from "./middleware/errorMiddleware.js";
 // load .env file
 dotenv.config();
 
@@ -18,6 +19,8 @@ app.use(express.json());
 // routes
 app.use("/", authRoute);
 app.use("/posts", postRoute);
+// error checker
+app.use(malformedBodyChecker);
 
 // initialize connection to database and start express instance
 connect()

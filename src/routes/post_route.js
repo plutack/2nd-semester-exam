@@ -9,10 +9,11 @@ const postRoute = Router();
 // match route to their respective controller and add auth middleware to protected routes
 postRoute.post(
   "/",
+  authMiddleware,
   generateMiddleware(postValidationSchema),
   postController.createPost,
 );
-postRoute.get("/:id", postController.getSinglePost);
+postRoute.get("/:id", authMiddleware, postController.getSinglePost);
 postRoute.patch("/:id", postController.updatePost);
 postRoute.delete("/:id", postController.deletePost);
 postRoute.get("/", postController.getAllPosts);

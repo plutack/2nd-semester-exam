@@ -6,6 +6,8 @@ export const getAllPosts = async ({
   page = 1,
   order = "desc",
   orderBy = "createdAt",
+  state,
+  userId,
 }) => {
   const skip = (page - 1) * limit;
   const allowedOrderFields = ["createdAt", "readingCount", "readingTime"];
@@ -17,9 +19,16 @@ export const getAllPosts = async ({
   }
 
   const sortOptions = { [orderBy]: order === "desc" ? -1 : 1 };
+  const filterOptions = {};
+  if (state) {
+    filterOptions.state = state;
+  }
+  if (userId) {
+    filterOptions.user = userId;
+  }
 
-  const posts = await Post.find({})
-    .populate("user", "name") // Assuming you want to include the user's name
+  const posts = await Post.find(filterOptions)
+    .populate("author", "") // Assuming you want to include the user's name
     .sort(sortOptions)
     .skip(skip)
     .limit(parseInt(limit));
@@ -27,9 +36,31 @@ export const getAllPosts = async ({
   return posts;
 };
 
-export const getSinglePost = async (id) => {
-  const post = await Post.findById(id).populate("user", "");
+export const getSinglePost = async (id, user) => {
+  const post = await Post.findById(id).populate("author", "");
+  if (!post) {
+    throw new ErrorWithStatusCode("Post not found", 400);
+  }
+  if (user.email === post?.author?.email && post?.state === "draft") {
+    return post;
+  }
+  if (!post || post?.state === "draft") {
+    throw new ErrorWithStatusCode("Post not found", 400);
+  }
+  post.readCount += 1;
+  await post.save();
   return post;
+};
+
+export const getAllUserPost = async (username, user) => {
+  if (username === user.username) {
+    await getAllPosts({ userId: user.id });
+  } else {
+    await getAllPosts({
+      state: "Published",
+      userId: user.id,
+    });
+  }
 };
 
 export const updatePost = async (id, updateField) => {
@@ -41,18 +72,20 @@ export const updatePost = async (id, updateField) => {
 };
 
 export const deletePost = async (id) => {
-  const post = await Post.findByIdAndDelete(id).populate("user", "");
+  const post = await Post.findByIdAndDelete(id).populate("author", "");
   return post;
 };
 
-export const createPost = async (title, body, user) => {
+export const createPost = async (title, body, description, tags, user) => {
   console.log(user);
   const newPost = new Post({
     title,
     body,
-    user,
+    description,
+    tags,
+    author: user,
   });
   await newPost.save();
-  await newPost.populate("user", "");
+  await newPost.populate("author", "");
   return newPost;
 };

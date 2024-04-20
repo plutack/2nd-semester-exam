@@ -6,13 +6,15 @@ import bcrypt from "bcrypt";
 // create function to handle /register route
 export const register = async (req, res) => {
   try {
-    const { name, email, password, confirmPassword, role } = req.body;
+    const { firstName, lastName, username, email, password, confirmPassword } =
+      req.body;
     const newUser = await authService.register(
-      name,
+      firstName,
+      lastName,
+      username,
       email,
       password,
       confirmPassword,
-      role,
     );
     res.json({
       message: "User created succesfully",

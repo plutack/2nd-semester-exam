@@ -14,6 +14,12 @@ const userSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
+    username: {
+      type: String,
+      unique: true,
+      required: true,
+      trim: true,
+    },
     email: {
       type: String,
       unique: true,
@@ -37,12 +43,25 @@ const userSchema = mongoose.Schema(
   },
 );
 
+userSchema.virtual("fullName").get(function () {
+  return `${this.firstName} ${this.lastName}`;
+});
+
+userSchema.pre("save", function (next) {
+  // capitalize
+  this.firstName =
+    this.firstName.charAt(0).toUpperCase() + this.firstName.slice(1);
+  this.lastName =
+    this.lastName.charAt(0).toUpperCase() + this.lastName.slice(1);
+  next();
+});
+
 // properly format how user details is returned to the user
 // transform with 3 dot operator is used to rearrange as required by specification of returned response
 userSchema.set("toJSON", {
   virtuals: true,
   versionKey: false,
-  transform: (doc, ret) => {
+  transform: (_, ret) => {
     delete ret.password;
     delete ret._id;
     delete ret.role;
@@ -53,12 +72,6 @@ userSchema.set("toJSON", {
   },
 });
 
-userSchema.pre("save", function (next) {
-  // capitalize
-  this.firstName.charAt(0).toUpperCase() + this.firstName.slice(1);
-  this.lastName.charAt(0).toUpperCase() + this.lastName.slice(1);
-  next();
-});
 // initialize model from schema
 const User = mongoose.model("User", userSchema);
 

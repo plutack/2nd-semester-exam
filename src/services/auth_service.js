@@ -5,11 +5,12 @@ import bcrypt from "bcrypt";
 import { ErrorWithStatusCode } from "../exceptions/customErrorConstructor.js";
 
 export const register = async (
-  name,
+  firstName,
+  lastName,
+  username,
   email,
   password,
   confirmPassword,
-  role,
 ) => {
   const user = await User.findOne({ email });
   if (password !== confirmPassword) {
@@ -23,11 +24,12 @@ export const register = async (
   const newUser = new User({
     firstName,
     lastName,
+    username,
     email,
     password: hashedPassword,
   });
   await newUser.save();
-  delete newUser.password;
+  // delete newUser.password;
   return newUser;
 };
 
@@ -44,9 +46,9 @@ export const login = async (email, password) => {
       _id: user._id,
     },
     JWTSecret,
-    {
-      expiresIn: "60m",
-    },
+    // {
+    //   expiresIn: "60m",
+    // },
   );
   return {
     accessToken,
