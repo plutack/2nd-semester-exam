@@ -2,10 +2,10 @@
 import Post from "../database/schema/post_schema.js";
 import { ErrorWithStatusCode } from "../exceptions/customErrorConstructor.js";
 export const getAllPosts = async ({
-  limit = 20,
-  page = 1,
-  order = "desc",
-  orderBy = "createdAt",
+  limit,
+  page,
+  order,
+  orderBy,
   state,
   userId,
 }) => {
@@ -24,8 +24,9 @@ export const getAllPosts = async ({
     filterOptions.state = state;
   }
   if (userId) {
-    filterOptions.user = userId;
+    filterOptions.author = userId;
   }
+  console.log(filterOptions);
 
   const posts = await Post.find(filterOptions)
     .populate("author", "") // Assuming you want to include the user's name
@@ -52,7 +53,7 @@ export const getSinglePost = async (id, user) => {
   return post;
 };
 
-export const getAllUserPost = async (username, user) => {
+export const getAllUserDraftPost = async (username, user) => {
   if (username === user.username) {
     await getAllPosts({ userId: user.id });
   } else {

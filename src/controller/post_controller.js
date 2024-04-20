@@ -22,11 +22,24 @@ export const createPost = async (req, res) => {
   }
 };
 
-export const getAllUserPosts = async (req, res) => {
+export const getAllUserDraftPosts = async (req, res) => {
   try {
+    const {
+      limit = 20,
+      page = 1,
+      order = "desc",
+      orderBy = "createdAt",
+    } = req.query;
     const user = req.user;
-    const username = req.params.username;
-    const data = await postService.getAllUserPost(username, user);
+    console.log(user);
+    const data = await postService.getAllPosts({
+      limit,
+      page,
+      order,
+      orderBy,
+      state: "draft",
+      userId: user._id,
+    });
     res.json({
       message: "All posts",
       data,
@@ -83,7 +96,7 @@ export const deletePost = async (req, res) => {
 export const getAllPosts = async (req, res) => {
   try {
     const {
-      limit = 10,
+      limit = 20,
       page = 1,
       order = "desc",
       orderBy = "createdAt",

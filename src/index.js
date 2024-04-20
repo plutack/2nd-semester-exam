@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { connect } from "./database/connection.js";
 import authRoute from "./routes/auth_route.js";
 import postRoute from "./routes/post_route.js";
+import draftRoute from "./routes/draftRoute.js";
 import { userSeeder } from "./seeder/adminSeeder.js";
 import { malformedBodyChecker } from "./middleware/errorMiddleware.js";
 // load .env file
@@ -19,6 +20,7 @@ app.use(express.json());
 // routes
 app.use("/", authRoute);
 app.use("/posts", postRoute);
+app.use("/drafts", draftRoute);
 // error checker
 app.use(malformedBodyChecker);
 
