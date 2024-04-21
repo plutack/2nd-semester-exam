@@ -1,6 +1,6 @@
 // import necessary modules
 import { Router } from "express";
-import * as authController from "../controller/auth_controller.js";
+import * as authController from "../controller/authController.js";
 import { loginSchema, registerSchema } from "../validation/authValidation.js";
 import { generateMiddleware } from "../middleware/routeMiddleware.js";
 const authRoute = Router();

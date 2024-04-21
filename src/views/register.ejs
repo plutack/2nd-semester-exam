@@ -21,51 +21,9 @@
   <body>
     <div class="container">
       <div class="col-sm-6 col-sm-offset-3">
-        <h1><span class="fa fa-sign-in"></span> Login</h1>
+        <h1><span class="fa fa-sign-in"></span> Register</h1>
         <!-- LOGIN FORM -->
-        <form action="/login" method="post">
-          <!-- Row for first and last name -->
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="firstname">First Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="firstname"
-                  id="firstname"
-                />
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="lastname">Last Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="lastname"
-                  id="lastname"
-                />
-              </div>
-            </div>
-          </div>
-          <!-- Email -->
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" class="form-control" name="email" id="email" />
-          </div>
-          <!-- Password -->
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              name="password"
-              id="password"
-            />
-          </div>
-          <!-- Submit Button -->
-          <form action="/login" method="post">
+          <form action="/register" method="post">
             <!-- Row for first and last name -->
             <div class="row">
               <div class="col-md-6">
@@ -74,22 +32,27 @@
                   <input
                     type="text"
                     class="form-control"
-                    name="firstname"
-                    id="firstname"
+                    name="firstName"
+                    id="firstName"
                   />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="lastname">Last Name</label>
+                  <label for="lastName">Last Name</label>
                   <input
                     type="text"
                     class="form-control"
-                    name="lastname"
+                    name="lastName"
                     id="lastname"
                   />
                 </div>
               </div>
+            </div>
+            <!-- Username -->
+            <div class="form-group">
+              <label for="email">Username</label>
+              <input type="text" class="form-control" name="username" id="username" />
             </div>
             <!-- Email -->
             <div class="form-group">
@@ -106,9 +69,18 @@
                 id="password"
               />
             </div>
+            <div class="form-group">
+              <label for="confirmpassword">confirm password</label>
+              <input
+                type="password"
+                class="form-control"
+                name="confirmPassword"
+                id="confirmPassword"
+              />
+            </div>
             <!-- Submit Button -->
             <button type="submit" class="btn btn-warning btn-lg mt-3">
-              Login
+              Register
             </button>
           </form>
         </form>

@@ -1,6 +1,6 @@
 // import necessary modules
 import Jwt from "jsonwebtoken";
-import * as authService from "../services/auth_service.js";
+import * as authService from "../services/authService.js";
 import bcrypt from "bcrypt";
 
 // create function to handle /register route
@@ -16,8 +16,8 @@ export const register = async (req, res) => {
       password,
       confirmPassword,
     );
-    res.json({
-      message: "User created succesfully",
+    res.status(201).json({
+      message: "User created successfully",
       data: newUser,
     });
   } catch (err) {

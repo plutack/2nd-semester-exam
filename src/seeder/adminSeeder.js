@@ -1,5 +1,7 @@
 import { connect } from "../database/connection.js";
 import bcrypt from "bcrypt";
+import logger from "../middleware/loggerMiddleware.js";
+
 export const userSeeder = async () => {
   const admin = {
     firstName: process.env.ADMIN_FIRSTNAME,
@@ -8,11 +10,11 @@ export const userSeeder = async () => {
     password: await bcrypt.hash(process.env.ADMIN_PASSWORD, 10),
     role: "ADMIN",
   };
-  const mongoDB = await connect(process.env.MONGO_URL);
+  const mongoDB = await connect(process.env.MONGODB_URI);
   const userModel = mongoDB.connection.db.collection("users");
 
   if (await userModel.findOne({ email: admin.email })) {
-    console.log("Admin already exists");
+    logger.info("Admin already exists");
     return;
   }
 

@@ -1,6 +1,6 @@
 // import necessary modules
 import Jwt from "jsonwebtoken";
-import User from "../database/schema/user_schema.js";
+import User from "../database/models/userModel.js";
 import bcrypt from "bcrypt";
 import { ErrorWithStatusCode } from "../exceptions/customErrorConstructor.js";
 

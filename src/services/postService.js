@@ -1,5 +1,5 @@
 // import necessary modules
-import Post from "../database/schema/post_schema.js";
+import Post from "../database/models/postModel.js";
 import { ErrorWithStatusCode } from "../exceptions/customErrorConstructor.js";
 export const getAllPosts = async ({
   limit,
@@ -26,7 +26,6 @@ export const getAllPosts = async ({
   if (userId) {
     filterOptions.author = userId;
   }
-  console.log(filterOptions);
 
   const posts = await Post.find(filterOptions)
     .populate("author", "") // Assuming you want to include the user's name
@@ -78,7 +77,6 @@ export const deletePost = async (id) => {
 };
 
 export const createPost = async (title, body, description, tags, user) => {
-  console.log(user);
   const newPost = new Post({
     title,
     body,

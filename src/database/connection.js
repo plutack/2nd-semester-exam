@@ -6,8 +6,8 @@ import dotenv from "dotenv";
 dotenv.config(); // dotenv package is no longer neccesary in newer version of node
 
 // create connection instance to cloud mongoDB instance as described by documentation
-export const connect = async () => {
-  const uri = process.env.MONGODB_URI;
+export const connect = async (uri) => {
+  
   const clientOptions = {
     serverApi: { version: "1", strict: true, deprecationErrors: true },
   };

@@ -1,5 +1,5 @@
 // import necessary modules
-import * as postService from "../services/post_service.js";
+import * as postService from "../services/postService.js";
 
 // create function to handle creating posts /posts route
 export const createPost = async (req, res) => {
@@ -31,7 +31,7 @@ export const getAllUserDraftPosts = async (req, res) => {
       orderBy = "createdAt",
     } = req.query;
     const user = req.user;
-    console.log(user);
+    logger.info(user);
     const data = await postService.getAllPosts({
       limit,
       page,
@@ -51,31 +51,25 @@ export const getAllUserDraftPosts = async (req, res) => {
 // create function to handle updating posts /posts route
 export const updatePost = async (req, res) => {
   try {
-    let data;
     const id = req.params.id;
-    const { title, body } = req.body;
-    // handling missing payload by validating the payload
-    // if (!title && !body) {
-    //   return res
-    //     .status(400)
-    //     .json({ message: "Either title or body must be provided" });
-    // }
-    // only one can be changed according to specifications
-    if (title) {
-      data = await postService.updatePost(id, { title });
+    const updateFields = req.body; // This contains the fields to update
+
+    // Check if at least one valid field is provided
+    if (Object.keys(updateFields).length === 0) {
+      return res.status(400).json({ message: "At least one field must be provided for update." });
     }
-    if (body) {
-      data = await postService.updatePost(id, { body });
-    }
+
+    // Assuming the updatePost service updates the fields provided and handles errors internally
+    const data = await postService.updatePost(id, updateFields);
     res.json({
       message: "Post updated successfully",
       data,
     });
   } catch (err) {
-    // handle validation errors seperately
     res.status(err.statusCode || 500).json({ message: err.message });
   }
 };
+
 
 // create function to handle delete post on /posts route
 export const deletePost = async (req, res) => {
@@ -102,7 +96,6 @@ export const getAllPosts = async (req, res) => {
       orderBy = "createdAt",
     } = req.query;
     const data = await postService.getAllPosts({ limit, page, order, orderBy });
-    console.log(data);
     res.json({
       message: "All posts",
       data,
@@ -116,7 +109,7 @@ export const getAllPosts = async (req, res) => {
 export const getSinglePost = async (req, res) => {
   try {
     const user = req.user;
-    console.log(user);
+  
     const id = req.params.id;
     const data = await postService.getSinglePost(id, user);
     res.json({
