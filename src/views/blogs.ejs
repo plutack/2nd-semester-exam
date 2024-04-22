@@ -13,14 +13,14 @@
     <<% blogs.forEach(blog => { %>
   <div class="card mb-3">
     <div class="card-body">
-      <h5 class="card-title"><%= blog.title %></h5>
+      <h2 class="card-title"><%= blog.title %></h2>
       <p class="card-text"><%= blog.body %></p>
       <p class="card-text">Read Count: <%= blog.readCount %></p>
       <p class="card-text">Author: <%= blog.author.firstName %> <%= blog.author.lastName %></p>
       <a href="#" class="btn btn-primary">Read More</a>
     </div>
     <div class="card-footer text-muted">
-      <i class="far fa-clock"></i> <%= blog.createdAt %> <!-- Assuming createdAt is the creation date -->
+      <i class="far fa-clock"></i> <%= blog.createdAt %> 
     </div>
   </div>
 <% }) %>
