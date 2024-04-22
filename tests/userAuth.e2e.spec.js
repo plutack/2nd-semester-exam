@@ -1,6 +1,5 @@
 import bcrypt from "bcrypt";
 import request from "supertest";
-import mongodb from "mongodb";
 import { connect } from "../src/database/connection.js";
 import app from "../src/index.js";
 import dotenv from "dotenv";
@@ -9,7 +8,7 @@ dotenv.config();
 
 const TEST_DB = process.env.TEST_MONGODB_URI;
 
-describe("E2E tests", () => {
+describe("E2E tests for user", () => {
   let mongodb;
   const clearDB = async () => {
     if (mongodb) {
