@@ -13,7 +13,7 @@ export const createBlog = async (req, res) => {
       tags,
       user,
     );
-    res.json({
+    res.status(201).json({
       message: "Blog created",
       data,
     });
@@ -96,7 +96,7 @@ export const getAllBlogs = async (req, res) => {
     } = req.query;
     const data = await blogService.getAllBlogs({ limit, page, order, orderBy });
     res.json({
-      message: "All blogs",
+      message: "All Blogs",
       data,
     });
   } catch (err) {

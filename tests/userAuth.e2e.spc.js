@@ -65,7 +65,7 @@ describe("E2E tests for user", () => {
   it("should be able to login and receive a valid JWT", async () => {
     await clearDB();
     mongodb.connection.db.collection("users").insertOne({
-      email: "test@yopmail.com",
+      email: "test@gmail.com",
       password: await bcrypt.hash("password", 10),
       username: "testuser123",
       firstName: "Test",
@@ -74,7 +74,7 @@ describe("E2E tests for user", () => {
     });
 
     const res = await request(app).post("/login").send({
-      email: "test@yopmail.com",
+      email: "test@gmail.com",
       password: "password",
     });
 

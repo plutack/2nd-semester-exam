@@ -63,7 +63,7 @@ export const getAllUserDraftBlog = async (username, user) => {
   }
 };
 
-export const updateblog = async (id, updateField) => {
+export const updateBlog = async (id, updateField) => {
   const blog = await blog.findByIdAndUpdate(id, updateField).populate(
     "user",
     "",
@@ -71,20 +71,20 @@ export const updateblog = async (id, updateField) => {
   return blog;
 };
 
-export const deleteblog = async (id) => {
+export const deleteBlog = async (id) => {
   const blog = await blog.findByIdAndDelete(id).populate("author", "");
   return blog;
 };
 
-export const createblog = async (title, body, description, tags, user) => {
-  const newblog = new blog({
+export const createBlog = async (title, body, description, tags, user) => {
+  const newBlog = new Blog({
     title,
     body,
     description,
     tags,
     author: user,
   });
-  await newblog.save();
-  await newblog.populate("author", "");
-  return newblog;
+  await newBlog.save();
+  await newBlog.populate("author", "");
+  return newBlog;
 };
