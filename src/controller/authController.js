@@ -1,7 +1,7 @@
 // import necessary modules
-import Jwt from "jsonwebtoken";
 import * as authService from "../services/authService.js";
-import bcrypt from "bcrypt";
+import logger from "../middleware/loggerMiddleware.js";
+
 
 // create function to handle /register route
 export const register = async (req, res) => {
