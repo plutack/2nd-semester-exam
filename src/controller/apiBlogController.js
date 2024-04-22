@@ -114,10 +114,9 @@ export const getAllBlogs = async (req, res) => {
 // create function to handle get a single blog on /blogs route
 export const getSingleBlog = async (req, res) => {
   try {
-    const user = req.user;
   
     const id = req.params.id;
-    const data = await blogService.getSingleBlog(id, user);
+    const data = await blogService.getSingleBlog(id);
     res.json({
       message: "Blog",
       data,

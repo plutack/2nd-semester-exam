@@ -6,7 +6,7 @@ export const getAllBlogs = async ({
   page,
   order,
   orderBy,
-  state,
+  state="Published",
   userId,
 }) => {
   const skip = (page - 1) * limit;
@@ -36,15 +36,15 @@ export const getAllBlogs = async ({
   return blogs;
 };
 
-export const getSingleBlog = async (id, user) => {
+export const getSingleBlog = async (id) => {
   const blog = await Blog.findById(id).populate("author", "");
   if (!Blog) {
     throw new ErrorWithStatusCode("blog not found", 400);
   }
-  if (user.email === blog?.author?.email && blog?.state === "draft") {
-    return blog;
-  }
-  if (!blog || blog?.state === "draft") {
+  // if (user.email === blog?.author?.email && blog?.state === "draft") {
+  //   return blog;
+  // }
+  if ( blog?.state === "draft") {
     throw new ErrorWithStatusCode("blog not found", 400);
   }
   blog.readCount += 1;

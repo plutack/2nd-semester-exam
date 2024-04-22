@@ -112,7 +112,7 @@ export const getAllBlogs = async (req, res) => {
 export const getSingleBlog = async (req, res) => {
   try {
     const id = req.params.id;
-    logger.info("Getting all blogs");
+    logger.info("Getting single blog");
     const { data } =  await fetchData(`${process.env.RENDER_EXTERNAL_URL}/api/blogs/${id}`);
     if (data){
       res.render("blog", {blog: data});

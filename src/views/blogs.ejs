@@ -18,7 +18,7 @@
       <p class="card-text">Read Count: <%= blog.readCount %></p>
       <p class="card-text">Author: <%= blog.author.firstName %> <%= blog.author.lastName %></p>
       <!-- Updated Read More button -->
-      <a href="/blogs/<%= blog._id %>" class="btn btn-primary">Read More</a>
+      <a href="/blogs/<%= blog.id %>" class="btn btn-primary">Read More</a>
     </div>
     
     <div class="card-footer text-muted">

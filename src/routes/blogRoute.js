@@ -14,7 +14,7 @@ const blogRoute = Router();
 //   generateMiddleware(blogValidationSchema),
 //   blogController.createBlog,
 // );
-// blogRoute.get("/:id", authMiddleware, blogController.getSingleBlog);
+blogRoute.get("/:id", blogController.getSingleBlog);
 // blogRoute.patch("/:id",authMiddleware, validateUpdateFields, blogController.updateBlog);
 // blogRoute.delete("/:id", blogController.deleteBlog);
 blogRoute.get("/", blogController.getAllBlogs);
