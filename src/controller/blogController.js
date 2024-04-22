@@ -2,11 +2,11 @@
 import * as blogService from "../services/blogService.js";
 
 // create function to handle creating posts /blogs route
-export const createPost = async (req, res) => {
+export const createBlog = async (req, res) => {
   try {
     const user = req.user;
     const { title, body, description, tags } = req.body;
-    const data = await postService.createPost(
+    const data = await blogService.createPost(
       title,
       body,
       description,
@@ -14,7 +14,7 @@ export const createPost = async (req, res) => {
       user,
     );
     res.json({
-      message: "Post created",
+      message: "Blog created",
       data,
     });
   } catch (err) {
@@ -22,7 +22,7 @@ export const createPost = async (req, res) => {
   }
 };
 
-export const getAllUserDraftPosts = async (req, res) => {
+export const getAllUserDraftBlogs = async (req, res) => {
   try {
     const {
       limit = 20,
@@ -32,7 +32,7 @@ export const getAllUserDraftPosts = async (req, res) => {
     } = req.query;
     const user = req.user;
     logger.info(user);
-    const data = await postService.getAllPosts({
+    const data = await blogService.getAllBlogs({
       limit,
       page,
       order,
@@ -49,7 +49,7 @@ export const getAllUserDraftPosts = async (req, res) => {
   }
 };
 // create function to handle updating blogs /blogs route
-export const updatePost = async (req, res) => {
+export const updateBlog = async (req, res) => {
   try {
     const id = req.params.id;
     const updateFields = req.body; // This contains the fields to update
@@ -72,14 +72,13 @@ export const updatePost = async (req, res) => {
 
 
 // create function to handle delete post on /blogs route
-export const deletePost = async (req, res) => {
+export const deleteBlog = async (req, res) => {
   try {
     const id = req.params.id;
-    await postService.deletePost(id);
-    const data = await postService.getAllPosts();
+    const user = req.user;
+    await postService.deleteBlog(user, id);
     res.json({
-      message: "Post deleted successfully",
-      data,
+      message: "Blog deleted successfully"
     });
   } catch (err) {
     res.status(err.statusCode || 500).json({ message: err.message });
@@ -87,7 +86,7 @@ export const deletePost = async (req, res) => {
 };
 
 // create function to handle get all posts on /blogs route
-export const getAllPosts = async (req, res) => {
+export const getAllBlogs = async (req, res) => {
   try {
     const {
       limit = 20,
@@ -95,9 +94,9 @@ export const getAllPosts = async (req, res) => {
       order = "desc",
       orderBy = "createdAt",
     } = req.query;
-    const data = await postService.getAllPosts({ limit, page, order, orderBy });
+    const data = await blogService.getAllBlogs({ limit, page, order, orderBy });
     res.json({
-      message: "All posts",
+      message: "All blog",
       data,
     });
   } catch (err) {
@@ -106,12 +105,12 @@ export const getAllPosts = async (req, res) => {
 };
 
 // create function to handle get a single post on /blogs route
-export const getSinglePost = async (req, res) => {
+export const getSingleBlog = async (req, res) => {
   try {
     const user = req.user;
   
     const id = req.params.id;
-    const data = await postService.getSinglePost(id, user);
+    const data = await blogService.getSingleBlog(id, user);
     res.json({
       message: "Post",
       data,

@@ -1,22 +1,22 @@
 // import necessary modules
 import { Router } from "express";
-import * as postController from "../controller/blogController.js";
+import * as blogController from "../controller/blogController.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 import { generateMiddleware } from "../middleware/routeMiddleware.js";
-import { postValidationSchema } from "../validation/blogValidation.js";
+import { blogValidationSchema } from "../validation/blogValidation.js";
 import { validateUpdateFields } from "../middleware/updateMiddleware.js";
-const postRoute = Router();
+const blogRoute = Router();
 
 // match route to their respective controller and add auth middleware to protected routes
-postRoute.post(
+blogRoute.post(
   "/",
   authMiddleware,
-  generateMiddleware(postValidationSchema),
-  postController.createPost,
+  generateMiddleware(blogValidationSchema),
+  blogController.createBlog,
 );
-postRoute.get("/:id", authMiddleware, postController.getSinglePost);
-postRoute.patch("/:id",authMiddleware, validateUpdateFields, postController.updatePost);
-postRoute.delete("/:id", postController.deletePost);
-postRoute.get("/", postController.getAllPosts);
+blogRoute.get("/:id", authMiddleware, blogController.getSingleBlog);
+blogRoute.patch("/:id",authMiddleware, validateUpdateFields, blogController.updateBlog);
+blogRoute.delete("/:id", blogController.deleteBlog);
+blogRoute.get("/", blogController.getAllBlogs);
 
-export default postRoute;
+export default blogRoute;

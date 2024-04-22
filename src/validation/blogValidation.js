@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-export const postValidationSchema = Joi.object({
+export const blogValidationSchema = Joi.object({
   title: Joi.string().required(),
   description: Joi.string().required(),
   tags: Joi.array().items(Joi.string()).required(),
