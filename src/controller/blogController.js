@@ -99,7 +99,6 @@ export const getAllBlogs = async (req, res) => {
   try {
     logger.info("Getting all blogs");
     const { data } =  await fetchData(`${process.env.RENDER_EXTERNAL_URL}/api/blogs`);
-    console.log(data);
     if (data){
       res.render("blogs", {blogs: data});
     }
@@ -110,18 +109,16 @@ export const getAllBlogs = async (req, res) => {
 };
 
 // create function to handle get a single blog on /blogs route
-// export const getSingleBlog = async (req, res) => {
-//   try {
-//     const user = req.user;
-  
-//     const id = req.params.id;
-//     const data = await blogService.getSingleBlog(id, user);
-//     res.json({
-//       message: "Blog",
-//       data,
-//     });
-//   } catch (err) {
-//     logger.error(err)
-//     res.status(err.statusCode || 500).json({ message: err.message });
-//   }
-// };
+export const getSingleBlog = async (req, res) => {
+  try {
+    const id = req.params.id;
+    logger.info("Getting all blogs");
+    const { data } =  await fetchData(`${process.env.RENDER_EXTERNAL_URL}/api/blogs/${id}`);
+    if (data){
+      res.render("blog", {blog: data});
+    }
+  } catch (err) {
+    logger.error(err)
+    res.status(err.statusCode || 500).json({ message: err.message });
+  }
+};
