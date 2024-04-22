@@ -21,6 +21,7 @@ export const register = async (req, res) => {
       data: newUser,
     });
   } catch (err) {
+    logger.error(err)
     res.status(err.statusCode || 500).json({ message: err.message });
   }
 };
@@ -35,6 +36,7 @@ export const login = async (req, res) => {
       data,
     });
   } catch (err) {
+    logger.error(err)
     res.status(err.statusCode || 500).json({ message: err.message });
   }
 };

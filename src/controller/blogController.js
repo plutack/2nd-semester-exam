@@ -22,6 +22,7 @@ dotenv.config();
 //       data,
 //     });
 //   } catch (err) {
+//     logger.error(err)
 //     res.status(err.statusCode || 500).json({ message: err.message });
 //   }
 // };
@@ -49,6 +50,7 @@ dotenv.config();
 //       data,
 //     });
 //   } catch (err) {
+//     logger.error(err)  
 //     res.status(err.statusCode || 500).json({ message: err.message });
 //   }
 // };
@@ -71,6 +73,7 @@ dotenv.config();
 //       data,
 //     });
 //   } catch (err) {
+//     logger.error(err)
 //     res.status(err.statusCode || 500).json({ message: err.message });
 //   }
 // };
@@ -86,6 +89,7 @@ dotenv.config();
 //       message: "Blog deleted successfully"
 //     });
 //   } catch (err) {
+//      logger.error(err)
 //     res.status(err.statusCode || 500).json({ message: err.message });
 //   }
 // };
@@ -100,6 +104,7 @@ export const getAllBlogs = async (req, res) => {
       res.render("blogs", {blogs: data});
     }
   } catch (err) {
+    logger.error(err)
     res.status(err.statusCode || 500).json({ message: err.message });
   }
 };
@@ -116,6 +121,7 @@ export const getAllBlogs = async (req, res) => {
 //       data,
 //     });
 //   } catch (err) {
+//     logger.error(err)
 //     res.status(err.statusCode || 500).json({ message: err.message });
 //   }
 // };

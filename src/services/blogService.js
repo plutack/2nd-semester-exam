@@ -64,16 +64,21 @@ export const getAllUserDraftBlog = async (username, user) => {
 };
 
 export const updateBlog = async (id, updateField) => {
-  const blog = await blog.findByIdAndUpdate(id, updateField).populate(
+  const blog = await Blog.findByIdAndUpdate(id, updateField).populate(
     "user",
     "",
   );
   return blog;
 };
 
-export const deleteBlog = async (id) => {
-  const blog = await blog.findByIdAndDelete(id).populate("author", "");
-  return blog;
+export const deleteBlog = async (user, id) => {
+  const blog = await Blog.findById(id).populate("author", "");
+  console.log(blog.author.id, user._id, user.role)
+  if (blog.author.id === user._id || user.role === "ADMIN") {
+    await Blog.findByIdAndDelete(id).populate("author", "");
+  return ;
+  }
+  throw new ErrorWithStatusCode("Unauthorized", 401);
 };
 
 export const createBlog = async (title, body, description, tags, user) => {

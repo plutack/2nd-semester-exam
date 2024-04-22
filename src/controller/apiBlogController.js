@@ -1,5 +1,6 @@
 // import necessary modules
 import * as blogService from "../services/blogService.js";
+import logger from "../middleware/loggerMiddleware.js";
 
 // create function to handle creating blogs /blogs route
 export const createBlog = async (req, res) => {
@@ -17,7 +18,8 @@ export const createBlog = async (req, res) => {
       message: "Blog created",
       data,
     });
-  } catch (err) {
+  } catch (err){
+    logger.error(err)
     res.status(err.statusCode || 500).json({ message: err.message });
   }
 };
@@ -45,6 +47,7 @@ export const getAllUserDraftBlogs = async (req, res) => {
       data,
     });
   } catch (err) {
+    logger.error(err)
     res.status(err.statusCode || 500).json({ message: err.message });
   }
 };
@@ -66,21 +69,24 @@ export const updateBlog = async (req, res) => {
       data,
     });
   } catch (err) {
+    logger.error(err)
     res.status(err.statusCode || 500).json({ message: err.message });
   }
 };
 
 
-// create function to handle delete blog on /blogs route
+// create function to handle delete blog via /api/blogs/${id} route
 export const deleteBlog = async (req, res) => {
   try {
     const id = req.params.id;
     const user = req.user;
+    console.log(user, id)
     await blogService.deleteBlog(user, id);
     res.json({
       message: "Blog deleted successfully"
     });
   } catch (err) {
+    logger.error(err)
     res.status(err.statusCode || 500).json({ message: err.message });
   }
 };
@@ -100,6 +106,7 @@ export const getAllBlogs = async (req, res) => {
       data,
     });
   } catch (err) {
+    logger.error(err)
     res.status(err.statusCode || 500).json({ message: err.message });
   }
 };
@@ -116,6 +123,7 @@ export const getSingleBlog = async (req, res) => {
       data,
     });
   } catch (err) {
+    logger.error(err)
     res.status(err.statusCode || 500).json({ message: err.message });
   }
 };
