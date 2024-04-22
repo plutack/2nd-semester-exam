@@ -1,7 +1,7 @@
 // import necessary modules
-import Post from "../database/models/blogModel.js";
+import Blog from "../database/models/blogModel.js";
 import { ErrorWithStatusCode } from "../exceptions/customErrorConstructor.js";
-export const getAllPosts = async ({
+export const getAllBlogs = async ({
   limit,
   page,
   order,
@@ -27,64 +27,64 @@ export const getAllPosts = async ({
     filterOptions.author = userId;
   }
 
-  const posts = await Post.find(filterOptions)
+  const blogs = await Blog.find(filterOptions)
     .populate("author", "") // Assuming you want to include the user's name
     .sort(sortOptions)
     .skip(skip)
     .limit(parseInt(limit));
 
-  return posts;
+  return blogs;
 };
 
-export const getSinglePost = async (id, user) => {
-  const post = await Post.findById(id).populate("author", "");
-  if (!post) {
-    throw new ErrorWithStatusCode("Post not found", 400);
+export const getSingleBlog = async (id, user) => {
+  const blog = await Blog.findById(id).populate("author", "");
+  if (!Blog) {
+    throw new ErrorWithStatusCode("blog not found", 400);
   }
-  if (user.email === post?.author?.email && post?.state === "draft") {
-    return post;
+  if (user.email === blog?.author?.email && blog?.state === "draft") {
+    return blog;
   }
-  if (!post || post?.state === "draft") {
-    throw new ErrorWithStatusCode("Post not found", 400);
+  if (!blog || blog?.state === "draft") {
+    throw new ErrorWithStatusCode("blog not found", 400);
   }
-  post.readCount += 1;
-  await post.save();
-  return post;
+  blog.readCount += 1;
+  await blog.save();
+  return blog;
 };
 
-export const getAllUserDraftPost = async (username, user) => {
+export const getAllUserDraftBlog = async (username, user) => {
   if (username === user.username) {
-    await getAllPosts({ userId: user.id });
+    await getAllBlogs({ userId: user.id });
   } else {
-    await getAllPosts({
+    await getAllBlogs({
       state: "Published",
       userId: user.id,
     });
   }
 };
 
-export const updatePost = async (id, updateField) => {
-  const post = await Post.findByIdAndUpdate(id, updateField).populate(
+export const updateblog = async (id, updateField) => {
+  const blog = await blog.findByIdAndUpdate(id, updateField).populate(
     "user",
     "",
   );
-  return post;
+  return blog;
 };
 
-export const deletePost = async (id) => {
-  const post = await Post.findByIdAndDelete(id).populate("author", "");
-  return post;
+export const deleteblog = async (id) => {
+  const blog = await blog.findByIdAndDelete(id).populate("author", "");
+  return blog;
 };
 
-export const createPost = async (title, body, description, tags, user) => {
-  const newPost = new Post({
+export const createblog = async (title, body, description, tags, user) => {
+  const newblog = new blog({
     title,
     body,
     description,
     tags,
     author: user,
   });
-  await newPost.save();
-  await newPost.populate("author", "");
-  return newPost;
+  await newblog.save();
+  await newblog.populate("author", "");
+  return newblog;
 };

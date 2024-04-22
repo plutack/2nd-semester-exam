@@ -1,12 +1,8 @@
 import Joi from "joi";
 
 export const blogValidationSchema = Joi.object({
-  title: Joi.string().required(),
-  description: Joi.string().required(),
-  tags: Joi.array().items(Joi.string()).required(),
-  body: Joi.string().required(),
-  // author: Joi.string().optional(),
-  // state: Joi.string().valid("draft", "published").default("draft").optional(),
-  // readCount: Joi.number().integer().optional(),
-  // readingTime: Joi.number().integer().optional(),
+  title: Joi.string().not("").required(),
+  description: Joi.string().optional(),
+  tags: Joi.array().items(Joi.string()).optional(),
+  body: Joi.string().not("").required()
 });

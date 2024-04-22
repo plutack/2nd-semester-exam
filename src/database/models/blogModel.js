@@ -11,11 +11,11 @@ const blogSchema = mongoose.Schema(
     },
     description: {
       type: String,
-      required: true,
+      default: "",  
     },
     tags: {
       type: [String],
-      required: true,
+      default: [],
     },
     body: {
       type: String,

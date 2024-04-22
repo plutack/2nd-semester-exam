@@ -25,6 +25,7 @@
     "joi": "^17.12.3",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.3",
+    "morgan": "^1.10.0",
     "winston": "^3.13.0"
   },
   "devDependencies": {
