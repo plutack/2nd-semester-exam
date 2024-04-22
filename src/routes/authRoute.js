@@ -6,12 +6,9 @@ import { generateMiddleware } from "../middleware/routeMiddleware.js";
 const authRoute = Router();
 
 
-authRoute.get("/login", (req, res)=>{
-  res.render("login");
-});
-authRoute.get("/register", (req, res)=>{
-  res.render("register");
-});
+
+
+
 // match routes to their respective controller
 authRoute.post(
   "/register",
