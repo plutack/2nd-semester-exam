@@ -1,37 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Login</title>
+    <title>Home</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font-awespme.all.min.css">
+    <link rel="stylesheet" href="css/font-awesome.all.min.css"> <!-- Corrected the link -->
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
     <div class="container">
-      <div class="col-sm-6 col-sm-offset-3">
-        <h1><span class="fa fa-sign-in"></span> Login</h1>
+      <div class="jumbotron text-center">
+        <h1><span class="fa fa-lock"></span> Blog site</h1>
 
-        <!-- LOGIN FORM -->
-        <form action="/login" method="post">
-          <div class="form-group">
-            <label>Email</label>
-            <input type="text" class="form-control" name="email" />
-          </div>
-          <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" name="password" />
-          </div>
+        <p>Login or Register with:</p>
 
-          <button type="submit" class="btn btn-warning btn-lg mt-3">
-            Login
-          </button>
-          <div id="messageContainer" class="alert" style="display: none;"></div>
-        </form>
-        <hr />
-        <p>Need an account? <a href="/register">Register</a></p>
-        <p>Or go <a href="/">home</a>.</p>
+        <!-- Existing Login Button -->
+        <a href="/login" class="btn btn-default">
+          <span class="fa fa-user"></span> Login
+        </a>
+        <!-- Existing Register Button -->
+        <a href="/register" class="btn btn-default">
+          <span class="fa fa-user"></span> Register
+        </a>
+        <!-- New View Posts Button -->
+        <a href="/posts" class="btn btn-info">
+          <span class="fa fa-list"></span> View Posts
+        </a>
       </div>
     </div>
   </body>
-  
 </html>

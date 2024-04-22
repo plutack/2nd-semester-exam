@@ -78,7 +78,7 @@ describe("Blog Post Operations", () => {
     expect(response.body.data.length).toBeGreaterThanOrEqual(0);
   });
   it("should retrieve all posts without accessToken", async () => {
-    noAccessToken = null;
+    const noAccessToken = null;
     const response = await getAllBlogs(noAccessToken);
     expect(response.status).toBe(200);
     expect(Array.isArray(response.body.data)).toBeTruthy();
