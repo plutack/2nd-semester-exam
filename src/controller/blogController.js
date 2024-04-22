@@ -98,7 +98,7 @@ dotenv.config();
 export const getAllBlogs = async (req, res) => {
   try {
     logger.info("Getting all blogs");
-    const { data } =  await fetchData(`${process.env.API_URL}/api/blogs`);
+    const { data } =  await fetchData(`${process.env.RENDER_EXTERNAL_URL}/api/blogs`);
     console.log(data);
     if (data){
       res.render("blogs", {blogs: data});
