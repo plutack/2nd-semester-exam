@@ -5,12 +5,13 @@
   "main": "src/server.js",
   "type": "module",
   "directories": {
+    "src": "src",
     "test": "test"
   },
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js",
-    "prod": "NODE_ENV=production node app.js",
+    "dev": "nodemon src/server.js",
+    "prod": "NODE_ENV=production node src/server.js",
     "test": "jest"
   },
   "keywords": [],
