@@ -1,11 +1,9 @@
 // import necessary modules
 import express from "express";
 import dotenv from "dotenv";
-import { connect } from "./database/connection.js";
 import authRoute from "./routes/authRoute.js";
-import postRoute from "./routes/blogRoute.js";
+import blogRoute from "./routes/blogRoute.js";
 import draftRoute from "./routes/draftRoute.js";
-import { userSeeder } from "./seeder/adminSeeder.js";
 import { malformedBodyChecker } from "./middleware/errorMiddleware.js";
 import homeRoute from "./routes/homeRoute.js";
 import path from "path";
@@ -18,6 +16,10 @@ const app = express();
 const port = process.env.PORT;
 
 // middlewares
+app.use(err, req, res, next => {
+  logger.error(err);
+  next() // call winston to log error
+});
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // to properly parse from form element in ejs renders
 app.use(express.static(path.join(process.cwd(), "src", "public")));
