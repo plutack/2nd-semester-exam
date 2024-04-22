@@ -52,13 +52,17 @@ blogSchema.pre("save", function (next) {
   this.readingTime = Math.ceil(postWordCount / avgReadingSpeed);
   next();
 });
-postSchema.pre("findOneAndUpdate", function incrementReadCount(next) {
+
+// increment read count when blog is read via blogs/:id route
+blogSchema.pre("findOneAndUpdate", function incrementReadCount(next) {
   if (this._update && this._conditions) {
     this._update.$inc = { readCount: 1 };
   }
   next();
 });
-// transform with 3 dot operator is used to rearrange as required by specification of returned response
+
+
+// transform returned response with 3 dot operator is used to rearrange as required by specification of returned response
 blogSchema.set("toJSON", {
   virtuals: true,
   versionKey: false,
