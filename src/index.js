@@ -15,7 +15,7 @@ dotenv.config();
 const app = express();
 
 // middlewares
-app.use(err, req, res, next => {
+app.use((err, req, res, next) => {
   logger.error(err);
   next() // call winston to log error
 });
