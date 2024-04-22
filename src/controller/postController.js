@@ -1,7 +1,7 @@
 // import necessary modules
-import * as postService from "../services/postService.js";
+import * as blogService from "../services/blogService.js";
 
-// create function to handle creating posts /posts route
+// create function to handle creating posts /blogs route
 export const createPost = async (req, res) => {
   try {
     const user = req.user;
@@ -41,14 +41,14 @@ export const getAllUserDraftPosts = async (req, res) => {
       userId: user._id,
     });
     res.json({
-      message: "All posts",
+      message: "All blogs",
       data,
     });
   } catch (err) {
     res.status(err.statusCode || 500).json({ message: err.message });
   }
 };
-// create function to handle updating posts /posts route
+// create function to handle updating blogs /blogs route
 export const updatePost = async (req, res) => {
   try {
     const id = req.params.id;
@@ -71,7 +71,7 @@ export const updatePost = async (req, res) => {
 };
 
 
-// create function to handle delete post on /posts route
+// create function to handle delete post on /blogs route
 export const deletePost = async (req, res) => {
   try {
     const id = req.params.id;
@@ -86,7 +86,7 @@ export const deletePost = async (req, res) => {
   }
 };
 
-// create function to handle get all posts on /posts route
+// create function to handle get all posts on /blogs route
 export const getAllPosts = async (req, res) => {
   try {
     const {
@@ -105,7 +105,7 @@ export const getAllPosts = async (req, res) => {
   }
 };
 
-// create function to handle get a single post on /posts route
+// create function to handle get a single post on /blogs route
 export const getSinglePost = async (req, res) => {
   try {
     const user = req.user;

@@ -1,9 +1,9 @@
 // import necessary modules
 import { Router } from "express";
-import * as postController from "../controller/postController.js";
+import * as postController from "../controller/blogController.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 import { generateMiddleware } from "../middleware/routeMiddleware.js";
-import { postValidationSchema } from "../validation/postValidation.js";
+import { postValidationSchema } from "../validation/blogValidation.js";
 import { validateUpdateFields } from "../middleware/updateMiddleware.js";
 const postRoute = Router();
 

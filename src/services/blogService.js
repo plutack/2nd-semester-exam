@@ -1,5 +1,5 @@
 // import necessary modules
-import Post from "../database/models/postModel.js";
+import Post from "../database/models/blogModel.js";
 import { ErrorWithStatusCode } from "../exceptions/customErrorConstructor.js";
 export const getAllPosts = async ({
   limit,

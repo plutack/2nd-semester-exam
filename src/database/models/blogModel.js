@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import { countWords } from "../../helper/textHelpers.js";
 import joi from "joi";
 // create schema for post
-const postSchema = mongoose.Schema(
+const blogSchema = mongoose.Schema(
   {
     title: {
       type: String,
@@ -46,7 +46,7 @@ const postSchema = mongoose.Schema(
 );
 
 // properly format how post details is returned to the user
-postSchema.pre("save", function (next) {
+blogSchema.pre("save", function (next) {
   const avgReadingSpeed = 250; // average reading speed in word per minute
   const postWordCount = countWords(this.body);
   this.readingTime = Math.ceil(postWordCount / avgReadingSpeed);
@@ -59,7 +59,7 @@ postSchema.pre("findOneAndUpdate", function incrementReadCount(next) {
   next();
 });
 // transform with 3 dot operator is used to rearrange as required by specification of returned response
-postSchema.set("toJSON", {
+blogSchema.set("toJSON", {
   virtuals: true,
   versionKey: false,
   transform: (_, ret) => {
@@ -72,6 +72,6 @@ postSchema.set("toJSON", {
 });
 
 // initailize model from defined schema
-const Post = mongoose.model("Post", postSchema);
+const Blog = mongoose.model("Blog", blogSchema);
 
-export default Post;
+export default Blog;

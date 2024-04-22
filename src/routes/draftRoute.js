@@ -1,6 +1,6 @@
 // import necessary modules
 import { Router } from "express";
-import * as postController from "../controller/postController.js";
+import * as postController from "../controller/blogController.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 const draftRoute = Router();
 
