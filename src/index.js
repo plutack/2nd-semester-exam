@@ -13,7 +13,6 @@ dotenv.config();
 
 // declare variables
 const app = express();
-const port = process.env.PORT;
 
 // middlewares
 app.use(err, req, res, next => {
