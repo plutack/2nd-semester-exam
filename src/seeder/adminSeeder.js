@@ -6,6 +6,7 @@ export const userSeeder = async () => {
   const admin = {
     firstName: process.env.ADMIN_FIRSTNAME,
     lastName: process.env.ADMIN_LASTNAME,
+    username: process.env.ADMIN_USERNAME,
     email: process.env.ADMIN_EMAIL,
     password: await bcrypt.hash(process.env.ADMIN_PASSWORD, 10),
     role: "ADMIN",
