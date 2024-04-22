@@ -1,0 +1,100 @@
+[{
+  "_id": {
+    "$oid": "6623a0e5bae481553b93852c"
+  },
+  "firstName": "Talut",
+  "lastName": "Salako",
+  "email": "salakotalut@gmail.com",
+  "password": "$2b$10$TPvzT.o3Vsk1jbvjr0oTE.ly61VrQ4wBnF3ac7szfhR9d7hET2XBC",
+  "role": "ADMIN"
+},
+{
+  "_id": {
+    "$oid": "6623a2d75467e400c181cc81"
+  },
+  "firstName": "Sofiat",
+  "lastName": "Salako",
+  "username": "amiaa",
+  "email": "sofiatsalsako@gmail.com",
+  "password": "$2b$10$NJmImRczhC/0ytDBMy8qP.4GeqqwQ11dpRO4b5yp3KA0/IAy0uU32",
+  "role": "USER",
+  "createdAt": {
+    "$date": "2024-04-20T11:11:19.217Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-20T11:11:19.217Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6623a3465467e400c181cc88"
+  },
+  "firstName": "Sofiat",
+  "lastName": "Salako",
+  "username": "amiaa1",
+  "email": "sofiatsalako@gmail.com",
+  "password": "$2b$10$vmIPB38PVRIMxC8rBxOz3ur9De.9EKtzfbrqupyIYDJuChznhzWFq",
+  "role": "USER",
+  "createdAt": {
+    "$date": "2024-04-20T11:13:10.259Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-20T11:13:10.259Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6624dae86bca617e9822e083"
+  },
+  "firstName": "Korede",
+  "lastName": "Salako",
+  "username": "korex",
+  "email": "koredesalako@gmail.com",
+  "password": "$2b$10$67HyvRxhYNvq.Xhp1s0uJuxNvrP8ue0LtLSuinfozlYqF.o3iBUD6",
+  "role": "USER",
+  "createdAt": {
+    "$date": "2024-04-21T09:22:48.982Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-21T09:22:48.982Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66263e2bbac0dc70c8e0c066"
+  },
+  "firstName": "Bayo",
+  "lastName": "Salami",
+  "username": "bsm",
+  "email": "bayosalami@gmail.com",
+  "password": "$2b$10$YeE3ZpeDx3lo3K2b6FsTOe.v0Xf5/xVscrX084n01qTqv7Pws4TJ.",
+  "role": "USER",
+  "createdAt": {
+    "$date": "2024-04-22T10:38:35.970Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-22T10:38:35.970Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6626b19dc2554af22cbad632"
+  },
+  "firstName": "Baqhi",
+  "lastName": "Salako",
+  "username": "crescent_knight",
+  "email": "bsalako@gmail.com",
+  "password": "$2b$10$uxy4Fc65kQtxCaaGP4hPlOe3DUqmWzDNCI2XbYWYfCw1LtOryOmVC",
+  "role": "USER",
+  "createdAt": {
+    "$date": "2024-04-22T18:51:09.352Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-22T18:51:09.352Z"
+  },
+  "__v": 0
+}]
