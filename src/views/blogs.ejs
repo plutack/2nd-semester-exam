@@ -17,8 +17,10 @@
       <p class="card-text"><%= blog.body %></p>
       <p class="card-text">Read Count: <%= blog.readCount %></p>
       <p class="card-text">Author: <%= blog.author.firstName %> <%= blog.author.lastName %></p>
-      <a href="#" class="btn btn-primary">Read More</a>
+      <!-- Updated Read More button -->
+      <a href="/blogs/<%= blog._id %>" class="btn btn-primary">Read More</a>
     </div>
+    
     <div class="card-footer text-muted">
       <i class="far fa-clock"></i> <%= blog.createdAt %> 
     </div>
