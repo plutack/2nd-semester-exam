@@ -56,12 +56,17 @@ export const getSingleBlog = async (id, user) => {
   if (!Blog) {
     throw new ErrorWithStatusCode("blog not found", 400);
   }
-  if (user?.email === blog?.author?.email) {
+  if(blog.state === "published"){
     blog.readCount += 1;
     await blog.save();
     return blog;
   }
-  if ( blog?.state === "draft") {
+  if (user?.email === blog.author.email) {
+    blog.readCount += 1;
+    await blog.save();
+    return blog;
+  }
+  if ( blog.state === "draft") {
     throw new ErrorWithStatusCode("blog not found", 400);
   }
   blog.readCount += 1;
