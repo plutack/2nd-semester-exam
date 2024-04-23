@@ -1,10 +1,11 @@
 // import necessary modules
 import express from "express";
 import dotenv from "dotenv";
+import process from 'node:process';
 import authRoute from "./routes/authRoute.js";
 import blogRoute from "./routes/blogRoute.js";
 import apiBlogRoute from "./routes/apiBlogRoute.js";
-import draftRoute from "./routes/draftRoute.js";
+import apiMyBlogRoute from "./routes/apiMyBlogRoute.js";
 import { malformedBodyChecker } from "./middleware/errorMiddleware.js";
 import homeRoute from "./routes/homeRoute.js";
 import path from "path";
@@ -23,7 +24,7 @@ app.use(morgan('combined', { stream }));
 app.use((err, req, res, next) => {
   logger.error(err); // call winston to log error
   if (res.statusCode === 500){
-    logger.error(err.stack)
+    logger.error(err.message)
   } 
   next() 
 });
@@ -40,7 +41,7 @@ app.use("/", homeRoute);
 app.use("/", authRoute);
 app.use("/api/blogs", apiBlogRoute);
 app.use("/blogs", blogRoute);
-app.use("/drafts", draftRoute);
+app.use("/my-blogs", apiMyBlogRoute);
 
 
 // error checker

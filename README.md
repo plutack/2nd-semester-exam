@@ -1,7 +1,3 @@
-# hosted link to site ->
-
-## an hosted instance of of mongodb on mongodb cloud is used as the database
-
 
 # Alt school blog semester Exam API Documentation
 
@@ -114,5 +110,5 @@ All API requests should be made to: https://twond-semester-exam.onrender.com/
         {timestamps},
    }
   }
- ```
+ 
 

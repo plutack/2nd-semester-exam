@@ -1,6 +1,6 @@
 // import necessary modules
 import { Router } from "express";
-import * as blogController from "../controller/blogController.js";
+import * as apiBlogController from "../controller/apiBlogController.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 const draftRoute = Router();
 
@@ -8,6 +8,6 @@ const draftRoute = Router();
 // draftRoute.get("/:id", authMiddleware, blogController.getSingleBlog);
 // draftRoute.patch("/:id", authMiddleware, blogController.updateBlog);
 // draftRoute.delete("/:id", authMiddleware, blogController.deleteBlog);
-// draftRoute.get("/", authMiddleware, blogController.getAllUserDraftBlogs);
+draftRoute.get("/", authMiddleware, apiBlogController.getAllUserBlogs);
 
 export default draftRoute;

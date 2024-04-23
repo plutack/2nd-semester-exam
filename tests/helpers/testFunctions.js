@@ -18,15 +18,16 @@ export async function deleteBlog(accessToken, blogId) {
         .delete(`/api/blogs/${blogId}`)
         .set("Authorization", `Bearer ${accessToken}`);
 }
-
-export async function getAllBlogs(accessToken) {
-  if (!accessToken) return await request(app).get("/api/blogs")
-  if (accessToken) {
+export async function getSingleBlog(accessToken, blogId) {
     return await request(app)
-        .get("/api/blogs")
+        .get(`/api/blogs/${blogId}`)
         .set("Authorization", `Bearer ${accessToken}`);
-  }
 }
+
+export async function getAllPublishedBlogs() {
+  return await request(app).get("/api/blogs")
+}
+
 
 export async function clearDB(mongodb) {
     if (mongodb) {

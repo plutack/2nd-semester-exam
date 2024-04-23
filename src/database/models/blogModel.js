@@ -1,7 +1,7 @@
 // import necessary modules
 import mongoose from "mongoose";
 import { countWords } from "../../helper/textHelpers.js";
-import joi from "joi";
+
 // create schema for post
 const blogSchema = mongoose.Schema(
   {
@@ -53,13 +53,7 @@ blogSchema.pre("save", function (next) {
   next();
 });
 
-// increment read count when blog is read via blogs/:id route
-blogSchema.pre("findOneAndUpdate", function incrementReadCount(next) {
-  if (this._update && this._conditions) {
-    this._update.$inc = { readCount: 1 };
-  }
-  next();
-});
+
 
 
 // transform returned response with 3 dot operator is used to rearrange as required by specification of returned response
@@ -75,7 +69,7 @@ blogSchema.set("toJSON", {
   },
 });
 
-// initailize model from defined schema
+// initialize model from defined schema
 const Blog = mongoose.model("Blog", blogSchema);
 
 export default Blog;

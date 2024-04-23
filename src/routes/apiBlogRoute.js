@@ -17,6 +17,6 @@ apiBlogRoute.post(
 apiBlogRoute.get("/:id", authMiddleware, apiBlogController.getSingleBlog);
 apiBlogRoute.patch("/:id",authMiddleware, validateUpdateFields, apiBlogController.updateBlog);
 apiBlogRoute.delete("/:id",authMiddleware, apiBlogController.deleteBlog);
-apiBlogRoute.get("/", apiBlogController.getAllBlogs);
+apiBlogRoute.get("/", apiBlogController.getAllPublishedBlogs);
 
 export default apiBlogRoute;

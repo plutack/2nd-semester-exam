@@ -2,7 +2,7 @@
 import * as blogService from "../services/blogService.js";
 import logger from "../middleware/loggerMiddleware.js";
 
-// create function to handle creating blogs /blogs route
+// create function to handle creating blogs /api/blogs route
 export const createBlog = async (req, res) => {
   try {
     const user = req.user;
@@ -24,34 +24,7 @@ export const createBlog = async (req, res) => {
   }
 };
 
-export const getAllUserDraftBlogs = async (req, res) => {
-  try {
-    const {
-      limit = 20,
-      page = 1,
-      order = "desc",
-      orderBy = "createdAt",
-    } = req.query;
-    const user = req.user;
-    logger.info(user);
-    const data = await blogService.getAllBlogs({
-      limit,
-      page,
-      order,
-      orderBy,
-      state: "draft",
-      userId: user._id,
-    });
-    res.json({
-      message: "All blogs",
-      data,
-    });
-  } catch (err) {
-    logger.error(err)
-    res.status(err.statusCode || 500).json({ message: err.message });
-  }
-};
-// create function to handle updating blogs /blogs route
+// create function to handle updating blogs /api/blogs/${id} route
 export const updateBlog = async (req, res) => {
   try {
     const id = req.params.id;
@@ -62,7 +35,7 @@ export const updateBlog = async (req, res) => {
       return res.status(400).json({ message: "At least one field must be provided for update." });
     }
 
-    // Assuming the updateBlog service updates the fields provided and handles errors internally
+    // if the updateBlog service updates the fields provided 
     const data = await blogService.updateBlog(id, updateFields);
     res.json({
       message: "Blog updated successfully",
@@ -91,8 +64,8 @@ export const deleteBlog = async (req, res) => {
   }
 };
 
-// create function to handle get all blogs on /blogs route
-export const getAllBlogs = async (req, res) => {
+// create function to handle get all blogs on /api/blogs route
+export const getAllPublishedBlogs = async (req, res) => {
   try {
     const {
       limit = 20,
@@ -100,7 +73,7 @@ export const getAllBlogs = async (req, res) => {
       order = "desc",
       orderBy = "createdAt",
     } = req.query;
-    const data = await blogService.getAllBlogs({ limit, page, order, orderBy });
+    const data = await blogService.getAllPublishedBlogs({ limit, page, order, orderBy });
     res.json({
       message: "All Blogs",
       data,
@@ -111,12 +84,49 @@ export const getAllBlogs = async (req, res) => {
   }
 };
 
+// create function to handle get all user  blogs on /blogs route
+export const getAllUserBlogs = async (req, res) => {
+  try {
+    const user = req.user;
+    const {
+      limit = 20,
+      page = 1,
+      state = null, // user can filter by state.
+    } = req.query;
+    
+
+    // Prepare options object to pass to the blog service.
+    const filterOptions = {
+      limit, 
+      page
+    };
+
+    // Include state only if it is either 'published' or 'draft'.
+    if (state === 'published' || state === 'draft') {
+      filterOptions.state = state;
+    }
+
+    // Call the blog service with the options object.
+    const data = await blogService.getAllUserBlogs(user, filterOptions);
+
+    // Return the data with a success response.
+    res.json({
+      message: "All Blogs",
+      data,
+    });
+  } catch (err) {
+    // Log the error and send an error response.
+    logger.error(err)
+    res.status(err.statusCode || 500).json({ message: err.message });
+  }
+};
+
 // create function to handle get a single blog on /blogs route
 export const getSingleBlog = async (req, res) => {
   try {
-  
+    const user = req.user;
     const id = req.params.id;
-    const data = await blogService.getSingleBlog(id);
+    const data = await blogService.getSingleBlog(id, user);
     res.json({
       message: "Blog",
       data,

@@ -3,6 +3,8 @@ import request from "supertest";
 import { connect } from "../src/database/connection.js";
 import app from "../src/index.js";
 import dotenv from "dotenv";
+import { clearDB } from "./helpers/testFunctions.js";
+import { mongo } from "mongoose";
 
 dotenv.config();
 
@@ -10,17 +12,9 @@ const TEST_DB = process.env.TEST_MONGODB_URI;
 
 describe("E2E tests for user", () => {
   let mongodb;
-  const clearDB = async () => {
-    if (mongodb) {
-      const collections = await mongodb.connection.db.collections();
-      for (const  collection of collections) {
-        await collection.deleteMany();
-      }
-    }
-  };
-
   beforeAll(async () => {
     mongodb = await connect(TEST_DB);
+    await clearDB(mongodb);
   });
 
   beforeEach(async () => {
@@ -37,13 +31,12 @@ describe("E2E tests for user", () => {
       email: "test@gmail.com",
       password: "password",
     });
-    console.log(res.body);
     expect(res.statusCode).toEqual(401);
     expect(res.body.message).toEqual("Unauthorized");
   });
 
   it("should be able to register", async () => {
-    await clearDB();
+    await clearDB(mongodb);
     const res = await request(app).post("/register").send({
       email: "test@gmail.com",
       password: "password",
@@ -63,7 +56,7 @@ describe("E2E tests for user", () => {
   });
 
   it("should be able to login and receive a valid JWT", async () => {
-    await clearDB();
+    await clearDB(mongodb);
     mongodb.connection.db.collection("users").insertOne({
       email: "test@gmail.com",
       password: await bcrypt.hash("password", 10),
