@@ -29,19 +29,20 @@ All API requests should be made to: https://twond-semester-exam.onrender.com/
     Success Response:
     
     {
-  "message": "Login successful",
-  "data": {
-    "accessToken": "string",
-    "id": "string",
-    "firstName": "string",
-    "lastName": "string",
-    "email": "string",
-    "username": "string",
-    "role": "string",
-    {timestamps}
-  }
-} 
-```
+   "message": "Login successful",
+    "data": {
+      "accessToken": "string",
+      "id": "string",
+      "firstName": "string",
+      "lastName": "string",
+      "email": "string",
+      "username": "string",
+      "role": "string",
+      timestamps
+    }
+  } 
+
+  ```
 
 - **Endpoint:** `/register`
 - **Method:** `POST`
@@ -49,69 +50,69 @@ All API requests should be made to: https://twond-semester-exam.onrender.com/
 - **Request Body:**
     ```
     {
-  "firstName": "string",
-  "lastName": "string",
-  "email": "string", // must be unique
-  "password": "string", // min 7 characters
-  "confirmPassword": "string",
-  "username": "string" //must be unique
-}
+     "firstName": "string",
+      "lastName": "string",
+      "email": "string", // must be unique
+      "password": "string", // min 7 characters
+      "confirmPassword": "string",
+      "username": "string" //must be unique
+    }
 
     Success Response:
     {
-  "message": "User created successfully",
-  "data": {
-    "firstName": "string",
-    "lastName": "string",
-    "email": "string",
-    {timestamps}
-  }
-}
-}
+      "message": "User created successfully",
+      "data": {
+        "firstName": "string",
+        "lastName": "string",
+        "email": "string",
+        {timestamps}
+     }
+    }
+   }
  
-    ```
+   ```
     
 - **Endpoint:** `/api/blogs`
 - **Method:** `GET`
-- **Description:** Retrieves all blogs that are marked as 'published'. This endpoint is accessible by both logged in and logged out users.
+- **Description:** Retrieves all blogs that are marked as                 'published'. This endpoint is accessible by both logged in and logged out users.
 - **Request Body:** 
   ```
   Success Response:
   {
-  "message": "All Blogs 
-  "data": [
-    {
-      "title": "string",
-      "body": "string",
-      "author": {user object},
-      "state": "published",
-      "description": "string",
-      "tags": ["string"],
-      {timestamps},
+    "message": "All Blogs 
+    "data": [
+      {
+        "title": "string",
+        "body": "string",
+        "author": {user object},
+        "state": "published",
+        "description": "string",
+        "tags": ["string"],
+        {timestamps},
+       }
+      ]
     }
-  ]
-}
- ```
+   ```
  
  
- - **Endpoint:** `/api/blogs/${id}`
+- **Endpoint:** `/api/blogs/${id}`
 - **Method:** `GET`
 - **Description:** Retrieves a single blog with {id} that are marked as 'published'. This endpoint is accessible by both logged in and logged out users.
 - **Request Body:** 
   ```
   Success Response:
   {
-  "message": "All Blogs 
-  "data":
-    {
-      "title": "string",
-      "body": "string",
-      "author": {user object},
-      "state": "published",
-      "description": "string",
-      "tags": ["string"],
-      {timestamps},
-    }
-}
+    "message": "All Blogs 
+    "data":
+      {
+        "title": "string",
+        "body": "string",
+        "author": {user object},
+        "state": "published",
+        "description": "string",
+        "tags": ["string"],
+        {timestamps},
+   }
+  }
  ```
 
