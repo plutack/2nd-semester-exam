@@ -3,6 +3,7 @@ import Jwt from "jsonwebtoken";
 import User from "../database/models/userModel.js";
 import bcrypt from "bcrypt";
 import { ErrorWithStatusCode } from "../exceptions/customErrorConstructor.js";
+import process from "node:process"
 
 export const register = async (
   firstName,
@@ -46,9 +47,9 @@ export const login = async (email, password) => {
       _id: user._id,
     },
     JWTSecret,
-    // {
-    //   expiresIn: "60m",
-    // },
+    {
+      expiresIn: "60m",
+    },
   );
   return {
     accessToken,
