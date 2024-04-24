@@ -61,10 +61,8 @@ export const getSingleBlog = async (id, user) => {
     await blog.save();
     return blog;
   }
-  if (user?.email === blog.author.email) {
-    blog.readCount += 1;
-    await blog.save();
-    return blog;
+  if (!user && blog.state ==="draft") {
+    throw new ErrorWithStatusCode("blog not found", 400);
   }
   if ( blog.state === "draft") {
     throw new ErrorWithStatusCode("blog not found", 400);
@@ -101,7 +99,7 @@ export const getAllUserBlogs = async (user, filterOptions) => {
 
 export const updateBlog = async (id, updateField) => {
   const blog = await Blog.findByIdAndUpdate(id, updateField).populate(
-    "user",
+    "author",
     "",
   );
   return blog;

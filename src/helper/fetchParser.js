@@ -1,10 +1,10 @@
-export function fetchData(url) {
+export async function fetchData(url) {
     return fetch(url)
       .then(response => {
         if (!response.ok) {
+          console.log(response)
           throw new Error('Network response was not ok');
         }
-        // Consume the response stream and parse JSON
         return response.json();
       })
       .then(data => {

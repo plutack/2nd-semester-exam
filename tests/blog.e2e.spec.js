@@ -8,6 +8,7 @@ import process from "node:process"
 import {
   createBlog,
   getSingleBlog,
+  updateBlogState,
   loginUser,
   deleteBlog,
   getAllPublishedBlogs,
@@ -46,7 +47,7 @@ describe("Blog Post Operations", () => {
   // Clean up: Delete the user after all tests
   afterAll(async () => {
     clearDB(mongodb)
-    await mongodb.connection.close();
+    await mongodb?.connection?.close();
   });
 
   it("should create a blog", async () => {
@@ -58,14 +59,28 @@ describe("Blog Post Operations", () => {
     expect(response.status).toBe(201);
     createdBlogId = response.body.data.id; // Save the ID for later tests
   });
+
   
   it("should fail to perform get draft post if not author ", async () => {
     const getResponse = await request(app).get(
       `/api/blogs/${createdBlogId}`
     );
 
-    expect(getResponse.body.message).toBe("Unauthorized no authorization header")
-    expect(getResponse.status).toBe(401); 
+    expect(getResponse.body.message).toBe("blog not found")
+    expect(getResponse.status).toBe(400); 
+  });
+
+  it("should update blog state", async () => {
+    const updatePayload = {state: "published"}
+    const response = await updateBlogState(accessToken, createdBlogId, updatePayload);
+    // expect(response.status).toBe(200);
+    expect(response.body.message).toBe("Blog updated successfully");
+  });
+
+  it("should get a blog", async () => {
+    const response = await getSingleBlog(accessToken, createdBlogId);
+    // expect(response.status).toBe(200);
+    expect(response.body.message).toBe("Blog");
   });
 
   it("should fail to perform delete blog without Bearer token", async () => {
@@ -89,11 +104,7 @@ describe("Blog Post Operations", () => {
     expect(Array.isArray(response.body.data)).toBeTruthy();
   });
 
-  it("should get a blog", async () => {
-    const response = await getSingleBlog(accessToken, createdBlogId);
-    // expect(response.status).toBe(200);
-    expect(response.body.message).toBe("Blog");
-  });
+
 
   it("should retrieve all published blogs", async () => {
   

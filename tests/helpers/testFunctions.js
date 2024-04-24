@@ -24,6 +24,13 @@ export async function getSingleBlog(accessToken, blogId) {
         .set("Authorization", `Bearer ${accessToken}`);
 }
 
+export async function updateBlogState(accessToken, blogId, updatePayload) {
+  return await request(app)
+      .patch(`/api/blogs/${blogId}`)
+      .send(updatePayload)
+      .set("Authorization", `Bearer ${accessToken}`);
+}
+
 export async function getAllPublishedBlogs() {
   return await request(app).get("/api/blogs")
 }

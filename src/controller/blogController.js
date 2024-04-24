@@ -2,6 +2,7 @@
 import logger from "../middleware/loggerMiddleware.js";
 import dotenv from "dotenv";
 import { fetchData } from "../helper/fetchParser.js";
+import process from "node:process"
 
 dotenv.config();
 
@@ -113,7 +114,10 @@ export const getSingleBlog = async (req, res) => {
   try {
     const id = req.params.id;
     logger.info("Getting single blog");
+
     const { data } =  await fetchData(`${process.env.RENDER_EXTERNAL_URL}/api/blogs/${id}`);
+    console.log("data", data)
+    
     if (data){
       res.render("blog", {blog: data});
     }

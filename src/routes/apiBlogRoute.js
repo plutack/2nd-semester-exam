@@ -14,7 +14,7 @@ apiBlogRoute.post(
   generateMiddleware(blogValidationSchema),
   apiBlogController.createBlog,
 );
-apiBlogRoute.get("/:id", authMiddleware, apiBlogController.getSingleBlog);
+apiBlogRoute.get("/:id", apiBlogController.getSingleBlog);
 apiBlogRoute.patch("/:id",authMiddleware, validateUpdateFields, apiBlogController.updateBlog);
 apiBlogRoute.delete("/:id",authMiddleware, apiBlogController.deleteBlog);
 apiBlogRoute.get("/", apiBlogController.getAllPublishedBlogs);
